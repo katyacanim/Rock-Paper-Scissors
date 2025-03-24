@@ -20,8 +20,10 @@ function getComputerChoice() {
     }
 }
 
-const container = document.querySelector("div");
-const paraComputerChoice = document.createElement("p")
+const container = document.querySelector("#results");
+const paraComputerChoice = document.createElement("p");
+paraComputerChoice.style = 
+"color: blue";
 container.appendChild(paraComputerChoice);
 const roundResult = document.createElement("p");
 container.appendChild(roundResult);
@@ -74,7 +76,11 @@ buttons.forEach((button) => {
         playRound(computerChoice, humanChoice);
         currentScore.textContent = "Score: Computer " + computerScore + " - " + humanScore + " Player";
         if(computerScore === 5 || humanScore === 5){
-            container.textContent = "Game over";
+            buttons.forEach( button => button.disabled = true );
+            const gameOver = document.createElement("p");
+            gameOver.textContent = "GAME OVER!"
+            gameOver.style = "color: red";
+            container.replaceChildren(gameOver);
             const finalResult = document.createElement("div");
             const finalScore = document.createElement("p");
             const winnerMessage = document.createElement("p");
@@ -91,6 +97,7 @@ buttons.forEach((button) => {
             else {
                 winnerMessage.textContent = "THATS A TIE!";
             }
+            
         }
     })
 })
