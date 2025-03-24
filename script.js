@@ -1,8 +1,9 @@
+//change how we get human choice
+//on click button id must be sent to human choice ???
+
 
 let computerScore = 0;
 let humanScore = 0;
-
-function playGame() {
 
     function getComputerChoice() {
         let randomNumber = Math.random();
@@ -16,29 +17,8 @@ function playGame() {
             return "Scissors";
         }
     }
-    let computerChoice = getComputerChoice();
-    console.log(computerChoice)
-    
-   
-    function getHumanChoice() {
-        let humanInput = prompt("Enter your choice: rock, paper or scissors");
-        if (humanInput.toLowerCase() === "rock") {
-            return "Rock";
-        }
-        else if (humanInput.toLowerCase() === "paper") {
-            return "Paper";
-        }
-        else if (humanInput.toLowerCase() === "scissors") {
-            return "Scissors"
-        }
-        else {
-            alert("You have to choose rock, or paper or scissors");
-            return getHumanChoice();
-        }
-    }
-    let humanChoice = getHumanChoice()
-    console.log(humanChoice);
-    
+
+
 
     function playRound(computerChoice, humanChoice) {
         if (computerChoice === "Rock" && humanChoice === "Paper") {
@@ -74,27 +54,29 @@ function playGame() {
             humanScore++;
             console.log("Rock beats scissors, you win!");
         }
-            }
-playRound(computerChoice, humanChoice);
-console.log("Computer - " + computerScore);
-console.log("Human - " + humanScore);
-}
+    }
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", function() {
+            let humanChoice = this.id;
+            let computerChoice = getComputerChoice();
+            console.log(humanChoice);
+            console.log(computerChoice);
+            playRound(computerChoice, humanChoice);
+            
+        })
+    })
 
-function repeat(fn, n){
-    if (n <= 0) return;
-    fn();
-    repeat(fn, n -1);
-}
 
-repeat(playGame, 5);
+
 
 console.log("Final Scores:")
 console.log("Computer - " + computerScore);
 console.log("Human - " + humanScore);
-if(computerScore > humanScore){
+if (computerScore > humanScore) {
     console.log("SORRY YOU LOST.");
 }
-else if( computerScore < humanScore){
+else if (computerScore < humanScore) {
     console.log("CONGRADULATIONS, YOU WON!!!!");
 }
 else {
